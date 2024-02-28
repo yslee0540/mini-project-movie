@@ -7,6 +7,7 @@
 <title>메인</title>
 </head>
 <body>
-ㅇㅇ
+<%@ include file="nav.jsp"%>
+<%@ include file="header.jsp"%>
 </body>
 </html>
