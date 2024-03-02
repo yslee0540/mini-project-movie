@@ -6,9 +6,11 @@
 <!-- SQL문 정의할 때 VO표현을 간단하게 하고 싶은 경우. 별명을 지어서 사용 -->
    <typeAliases>
       <typeAlias type="com.ys.movie.member.MemberVO" alias="memberVO"></typeAlias>
+      <typeAlias type="com.ys.movie.board.BoardVO" alias="boardVO"></typeAlias>
    </typeAliases>
    <mappers>
    <!-- SQL문 정의하는 파일들의 목록을 지정. -->
       <mapper resource="mapper/memberMapper.xml" />
+      <mapper resource="mapper/boardMapper.xml" />
    </mappers>
 </configuration>
