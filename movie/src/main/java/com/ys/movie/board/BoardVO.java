@@ -1,22 +1,24 @@
 package com.ys.movie.board;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class BoardVO {
 
-	private String board_no;
+	private int board_no;
 	private String content;
 	private String writer;
 	private String img;
 	private int start;
 	private int end;
 	private int page;
-	
+	private List<String> tag;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp date;
-	
+
 	public void setStartEnd(int page, int count) {
 		start = 1 + (page - 1) * count;
 		end = page * count;
@@ -46,11 +48,11 @@ public class BoardVO {
 		this.page = page;
 	}
 
-	public String getBoard_no() {
+	public int getBoard_no() {
 		return board_no;
 	}
 
-	public void setBoard_no(String board_no) {
+	public void setBoard_no(int board_no) {
 		this.board_no = board_no;
 	}
 
@@ -84,6 +86,20 @@ public class BoardVO {
 
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+
+	public List<String> getTag() {
+		return tag;
+	}
+
+	public void setTag(List<String> tag) {
+		this.tag = tag;
+	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [board_no=" + board_no + ", content=" + content + ", writer=" + writer + ", img=" + img
+				+ ", start=" + start + ", end=" + end + ", page=" + page + ", tag=" + tag + ", date=" + date + "]";
 	}
 
 }

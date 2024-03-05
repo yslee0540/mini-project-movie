@@ -9,7 +9,7 @@
 	style="margin-bottom: 30px; font-size: 18px; background-color: #000;">
 	<div class="container-fluid">
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link active" href="/bf"><b>Bike Friends</b></a></li>
+			<li class="nav-item"><a class="nav-link active" href="/movie"><b>Bike Friends</b></a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/movie/board/list" style="color:white;">커뮤니티</a></li>
 			<li class="nav-item"><a class="nav-link" href="/movie/event/eventmain" style="color:white;">이벤트</a></li>

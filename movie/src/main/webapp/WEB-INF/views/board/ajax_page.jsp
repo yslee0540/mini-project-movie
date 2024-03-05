@@ -9,7 +9,14 @@
 			<td><fmt:formatDate value="${vo.date}" pattern="yyyy-MM-dd" /></td>
 		</tr>
 		<tr>
-			<td colspan="2" id="content">${vo.content}</td>
+			<td colspan="2">${vo.content}</td>
+		</tr>
+		<tr>
+			<td colspan="2" id="content">
+				<c:forEach var="tag" items="${vo.tag}">
+					<a href="#">#${tag}</a>
+				</c:forEach>
+			</td>
 		</tr>
 	</table>
 	<hr>

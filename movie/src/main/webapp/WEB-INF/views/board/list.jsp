@@ -51,6 +51,12 @@ $(window).on("scroll", function() {
 <body>
 	<%@ include file="../../../nav.jsp"%>
 	<%@ include file="../../../header.jsp"%>
+	
+	<c:if test="${!empty id}">
+		<a href="write.jsp">
+			<button>게시물 작성</button>
+		</a>
+	</c:if>
 	<div id="post"></div>
 </body>
 </html>

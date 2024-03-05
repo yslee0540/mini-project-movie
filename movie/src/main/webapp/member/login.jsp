@@ -43,6 +43,12 @@
 				}
 			});
 		})
+		
+		$('input').keypress(function (e) {
+			if (e.keyCode === 13) {
+		        $('#login').trigger('click');
+		    }
+		});
 	})
 </script>
 </head>

@@ -7,10 +7,14 @@
    <typeAliases>
       <typeAlias type="com.ys.movie.member.MemberVO" alias="memberVO"></typeAlias>
       <typeAlias type="com.ys.movie.board.BoardVO" alias="boardVO"></typeAlias>
+      <typeAlias type="com.ys.movie.tag.TagVO" alias="tagVO"></typeAlias>
+      <typeAlias type="com.ys.movie.tag.BoardTagMapVO" alias="boardTagMapVO"></typeAlias>
    </typeAliases>
    <mappers>
    <!-- SQL문 정의하는 파일들의 목록을 지정. -->
       <mapper resource="mapper/memberMapper.xml" />
       <mapper resource="mapper/boardMapper.xml" />
+      <mapper resource="mapper/tagMapper.xml" />
+      <mapper resource="mapper/boardTagMapMapper.xml" />
    </mappers>
 </configuration>
