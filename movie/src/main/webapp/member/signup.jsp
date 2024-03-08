@@ -5,36 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<script type="text/javascript" src="../resources/js/jquery-3.6.4.js"></script>
+<%@ include file="../nav.jsp"%>
+<%@ include file="../header.jsp"%>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(function() {
 		//아이디
 		let checkId = false;
-		$('#checkId').click(function() {
-			if ($("#userId").val().trim() == '') {
-				$('#messageId').css('color', '#fba082').text('아이디를 입력하세요');
-				$('#userId').val('').focus();
+		$('#check-id').click(function() {
+			if ($("#user-id").val().trim() == '') {
+				$('#id-message').css('color', '#fba082').text('아이디를 입력하세요');
+				$('#user-id').val('').focus();
 				return;
 			}
-			
+
 			$.ajax({
 				url : 'checkId',
 				type : 'post',
 				data : {
-					id : $("#userId").val()
+					id : $("#user-id").val()
 				},
 				success : function(data) {
 					if (data == 'idNotFound') {
 						checkId = true;
-						$('#messageId').css('color', 'green').text('사용가능합니다.');
-						$('#userId').css('background-color', '#ddd');
-						$('#userId').prop('readonly', true);
+						$('#id-message').css('color', 'green').text('사용가능합니다.');
+						$('#user-id').css('background-color', '#ddd');
+						$('#user-id').prop('readonly', true);
 					} else if (data == 'idDuplicated') {
 						checkId = false;
-						$('#messageId').css('color', 'red').text('존재하는 아이디입니다.');
+						$('#id-message').css('color', 'red').text(
+								'존재하는 아이디입니다.');
 					} else if (data == 'notMatchPattern') {
 						checkId = false;
-						$('#messageId').css('color', 'red').text('4~12자의 영문 소문자, 숫자만 사용 가능합니다.');
+						$('#id-message').css('color', 'red').text(
+								'4~12자의 영문 소문자, 숫자만 사용 가능합니다.');
 					} else {
 						checkId = false;
 						alert('아이디 중복체크 오류');
@@ -45,23 +48,23 @@
 				}
 			});
 		});
-		
+
 		//비밀번호
 		var checkPw = '';
 		var userPw = '';
-		$('#checkPw').on('input', function() {
-			userPw = $("#userPw").val();
-			checkPw = $("#checkPw").val();
+		$('#check-pw').on('input', function() {
+			userPw = $("#user-pw").val();
+			checkPw = $("#check-pw").val();
 			if (userPw == checkPw) {
-				$('#messagePw').css('color', 'green').text('비밀번호가 일치합니다.');
+				$('#pw-message').css('color', 'green').text('비밀번호가 일치합니다.');
 			} else {
-				$('#messagePw').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
+				$('#pw-message').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
 			}
 		});
 
 		//이메일
-		const $domainListEl = $('#domainList');
-		const $domainInputEl = $('#domainTxt');
+		const $domainListEl = $('#domain-list');
+		const $domainInputEl = $('#domain-txt');
 
 		$domainListEl.on('change', function(event) {
 			let email = $domainInputEl.val().split('@');
@@ -75,7 +78,7 @@
 		});
 
 		//출생연도
-		const $birthYearEl = $('#birthYear');
+		const $birthYearEl = $('#birth-year');
 		let isYearOptionExisted = false;
 
 		$birthYearEl.on('focus', function() {
@@ -90,11 +93,11 @@
 				}
 			}
 		});
-		
+
 		//회원가입
 		$('input, select').on('input change', function() {
 	        var allInputsFilled = true;
-	        $('input').each(function() {
+	        $('#signupForm input').each(function() {
 	            if ($(this).val() === '') {
 	                allInputsFilled = false;
 	                return false;
@@ -110,34 +113,39 @@
 	});
 </script>
 </head>
+
 <body>
-	<%@ include file="../nav.jsp"%>
-	<%@ include file="../header.jsp"%>
-	<form action="signup">
-		<table>
-			<tr>
-				<td>아이디</td>
-				<td><input name="id" id="userId"> <input type="button"
-					id="checkId" value="중복체크"><br>
-					<div id="messageId"></div></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input name="pw" id="userPw" type="password"></td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인</td>
-				<td><input id="checkPw" type="password"><br>
-					<div id="messagePw"></div></td>
-			</tr>
-			<tr>
-				<td>닉네임</td>
-				<td><input name="name"></td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td><input name="email" id="domainTxt"><select
-					id="domainList">
+	<div class="main" style="width: 700px;">
+		<form action="signup" id="signupForm" method="post">
+			<div class="row g-3">
+				<div class="col-12">
+					<label for="user-id" class="form-label">아이디</label> <input
+						class="form-control" id="user-id" name="id">
+						<button id="check-id" type="button">중복체크</button>
+					<div id="id-message"></div>
+				</div>
+
+				<div class="col-12">
+					<label for="user-pw" class="form-label">비밀번호</label> <input
+						type="password" class="form-control mb-2" id="user-pw" name="pw">
+					<label for="check-pw" class="form-label">비밀번호 확인</label> <input
+						type="password" class="form-control" id="check-pw">
+					<div id="pw-message"></div>
+				</div>
+
+				<div class="col-12">
+					<label for="name" class="form-label">닉네임</label> <input
+						class="form-control" name="name" id="name">
+				</div>
+
+				<div class="col-md-8">
+					<label for="domain-txt" class="form-label">이메일</label> <input
+						type="email" class="form-control" name="email" id="domain-txt">
+				</div>
+
+				<div class="col-md-4">
+					<label class="form-label"><br></label> <select
+						class="form-select" id="domain-list">
 						<option value="type">직접 입력</option>
 						<option value="@naver.com">naver.com</option>
 						<option value="@google.com">google.com</option>
@@ -145,21 +153,22 @@
 						<option value="@nate.com">nate.com</option>
 						<option value="@kakao.com">kakao.com</option>
 						<option value="@daum.net">daum.net</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>출생연도</td>
-				<td><select name="birth" id="birthYear">
+					</select>
+				</div>
+
+				<div class="col-md-6">
+					<label class="form-label">출생연도</label> <select
+						class="form-select" name="birth" id="birth-year">
 						<option disabled selected>----</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<button id="signup" disabled>회원가입</button>
-				</td>
-			</tr>
-		</table>
-	</form>
+					</select>
+				</div>
+
+				<hr class="my-4">
+				<button class="btn btn-primary btn-lg" id="signup" disabled>회원가입</button>
+			</div>
+
+		</form>
+	</div>
 </body>
 
 </html>

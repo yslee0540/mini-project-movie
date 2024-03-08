@@ -5,25 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<script type="text/javascript" src="../resources/js/jquery-3.6.4.js"></script>
+<%@ include file="../nav.jsp"%>
+<%@ include file="../header.jsp"%>
 <script type="text/javascript">
 	$(function() {
 		$("#login").click(function() {
-			var userId = $("#userId").val();
-			var userPw = $("#userPw").val();
+			var userId = $("#user-id").val();
+			var userPw = $("#user-pw").val();
 
 			if (userId == "") {
 				alert("아이디를 입력하세요");
-				$("#userId").focus();
+				$("#user-id").focus();
 				return;
 			}
 
 			if (userPw == "") {
 				alert("비밀번호를 입력하세요");
-				$("#userPw").focus();
+				$("#user-pw").focus();
 				return;
 			}
-			
+
 			$.ajax({
 				url : 'login',
 				type : 'post',
@@ -43,34 +44,36 @@
 				}
 			});
 		})
-		
-		$('input').keypress(function (e) {
+
+		$('input').keypress(function(e) {
 			if (e.keyCode === 13) {
-		        $('#login').trigger('click');
-		    }
+				$('#login').trigger('click');
+			}
 		});
 	})
 </script>
 </head>
 <body>
-	<%@ include file="../nav.jsp"%>
-	<%@ include file="../header.jsp"%>
-	<table>
-		<tr>
-			<td>아이디</td>
-			<td><input name="id" id="userId"></td>
-		</tr>
-		<tr>
-			<td>비밀번호</td>
-			<td><input name="pw" id="userPw" type="password"></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<button id="login">로그인</button><br>
-				<div style="color:red" id="errorMessage"></div>
-			</td>
-		</tr>
-	</table>
+	<div class="main login-box">
+		<h1 class="h3 mb-4 fw-normal">로그인</h1>
+
+		<div class="form-floating mb-2">
+			<input class="form-control" name="id" id="user-id" placeholder="아이디">
+			<label for="floatingInput">아이디</label>
+		</div>
+		<div class="form-floating">
+			<input type="password" class="form-control" name="pw" id="user-pw"
+				placeholder="비밀번호"> <label for="floatingPassword">비밀번호</label>
+		</div>
+
+		<div class="form-check text-start my-3">
+			<input class="form-check-input" type="checkbox" value="remember-me"
+				id="flexCheckDefault"> <label class="form-check-label"
+				for="flexCheckDefault">로그인 정보 기억하기</label>
+		</div>
+		<button class="btn btn-primary w-100 py-2" id="login">로그인</button>
+		<div style="color: red;padding-top:8px;" id="errorMessage"></div>
+	</div>
 </body>
 
 </html>

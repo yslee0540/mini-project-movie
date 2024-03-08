@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 작성</title>
-<script type="text/javascript" src="../resources/js/jquery-3.6.4.js"></script>
+<%@ include file="../nav.jsp"%>
+<%@ include file="../header.jsp"%>
 <script type="text/javascript">
 	function validateForm() {
 		var content = document.getElementById('content').value;
@@ -68,8 +69,6 @@
 </script>
 </head>
 <body>
-<%@ include file="../nav.jsp"%>
-<%@ include file="../header.jsp"%>
 <c:if test="${!empty id}">
 	<form action="write" id="write-form" method="post" onsubmit="return validateForm()">
 	<input name="writer" value="${id}" type="hidden">

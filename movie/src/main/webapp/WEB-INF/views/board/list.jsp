@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물</title>
-<script type="text/javascript" src="../resources/js/jquery-3.6.4.js"></script>
+<%@ include file="../../../nav.jsp"%>
+<%@ include file="../../../header.jsp"%>
 <script>
 $(function() {
 	GetList(1);
@@ -49,14 +50,20 @@ $(window).on("scroll", function() {
 </script>
 </head>
 <body>
-	<%@ include file="../../../nav.jsp"%>
-	<%@ include file="../../../header.jsp"%>
-	
+	<div class="main" style="width: 800px;">
+		<div class="row">
+			<div class="col-9">
+				<div id="post"></div>
+			</div>
+
+			<div class="col-2">
+				<a href="write.jsp">
+					<button class="btn btn-primary fixed-button">게시물 작성</button>
+				</a>
+			</div>
+		</div>
+	</div>
 	<c:if test="${!empty id}">
-		<a href="write.jsp">
-			<button>게시물 작성</button>
-		</a>
 	</c:if>
-	<div id="post"></div>
 </body>
 </html>
