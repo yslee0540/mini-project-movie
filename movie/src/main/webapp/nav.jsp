@@ -20,8 +20,9 @@
 				<li><a href="#" class="nav-link px-2 link-body-emphasis">작품</a></li>
 			</ul>
 
-			<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-				<input type="search" class="form-control" placeholder="검색">
+			<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="/movie/search/keyword">
+				<input type="search" name="keyword" class="form-control" placeholder="검색">
+				<input name="page" value="1" type="hidden">
 			</form>
 			<%
 				if (session.getAttribute("id") == null) {
@@ -30,7 +31,7 @@
 				<a href="/movie/member/login.jsp" style="text-decoration: none;">
 					<button type="button" class="btn btn-outline-primary me-2">로그인</button>
 				</a> <a href="/movie/member/signup.jsp" style="text-decoration: none;">
-					<button type="button" class="btn btn-primary">Sign-up</button>
+					<button type="button" class="btn btn-primary">회원가입</button>
 				</a>
 			</div>
 			<%

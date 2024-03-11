@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ys.movie.tag.TagVO;
+
 public class BoardVO {
 
 	private int board_no;
@@ -15,6 +17,7 @@ public class BoardVO {
 	private int end;
 	private int page;
 	private List<String> tag;
+	private List<TagVO> tagList;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp date;
@@ -96,10 +99,19 @@ public class BoardVO {
 		this.tag = tag;
 	}
 
+	public List<TagVO> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(List<TagVO> tagList) {
+		this.tagList = tagList;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [board_no=" + board_no + ", content=" + content + ", writer=" + writer + ", img=" + img
-				+ ", start=" + start + ", end=" + end + ", page=" + page + ", tag=" + tag + ", date=" + date + "]";
+				+ ", start=" + start + ", end=" + end + ", page=" + page + ", tag=" + tag + ", tagList=" + tagList
+				+ ", date=" + date + "]";
 	}
 
 }

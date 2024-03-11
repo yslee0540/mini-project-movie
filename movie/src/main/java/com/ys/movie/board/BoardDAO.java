@@ -20,8 +20,8 @@ public class BoardDAO {
 		return my.selectList("board.list", vo);
 	}
 	
-	public int count(BoardVO vo) {
-		return my.selectOne("board.count", vo);
+	public int count() {
+		return my.selectOne("board.count");
 	}
 	
 	public int delete(int no) {

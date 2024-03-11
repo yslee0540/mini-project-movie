@@ -9,6 +9,7 @@
       <typeAlias type="com.ys.movie.board.BoardVO" alias="boardVO"></typeAlias>
       <typeAlias type="com.ys.movie.tag.TagVO" alias="tagVO"></typeAlias>
       <typeAlias type="com.ys.movie.tag.BoardTagMapVO" alias="boardTagMapVO"></typeAlias>
+      <typeAlias type="com.ys.movie.search.SearchVO" alias="searchVO"></typeAlias>
    </typeAliases>
    <mappers>
    <!-- SQL문 정의하는 파일들의 목록을 지정. -->
@@ -16,5 +17,6 @@
       <mapper resource="mapper/boardMapper.xml" />
       <mapper resource="mapper/tagMapper.xml" />
       <mapper resource="mapper/boardTagMapMapper.xml" />
+      <mapper resource="mapper/searchMapper.xml" />
    </mappers>
 </configuration>

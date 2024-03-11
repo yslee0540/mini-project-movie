@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search">
+
+	<select id="board-list" parameterType="searchVO" resultType="boardVO">
+		select *
+		from (
+			select row_number() over(order by date desc) as no, b.*
+			from board b
+			<choose>
+				<when test="tag_no != 0">
+					where board_no in (
+						select board_no from board_tag_map
+						where tag_no = #{tag_no}
+					)
+				</when>
+				<when test="keyword != null">
+					where content like CONCAT('%', #{keyword}, '%')
+					or board_no in (
+						select board_no from board_tag_map
+						where tag_no in (
+							select tag_no from tag
+							where tag_name like CONCAT('%', #{keyword}, '%')
+						)
+					)
+				</when>
+			</choose>
+		) as b2
+		where b2.no between #{start} and #{end}
+	</select>
+
+	<select id="board-count" parameterType="searchVO" resultType="int">
+		select count(*) from board
+		<choose>
+			<when test="tag_no != 0">
+				where board_no in (
+					select board_no from board_tag_map
+					where tag_no = #{tag_no}
+				)
+			</when>
+			<when test="keyword != null">
+				where content like CONCAT('%', #{keyword}, '%')
+				or board_no in (
+					select board_no from board_tag_map
+					where tag_no in (
+						select tag_no from tag
+						where tag_name like CONCAT('%', #{keyword}, '%')
+					)
+				)
+			</when>
+		</choose>
+	</select>
+	
+	<select id="tag-name" parameterType="int" resultType="String">
+		select tag_name from tag
+		where tag_no = #{tag_no}
+	</select>
+
+</mapper>

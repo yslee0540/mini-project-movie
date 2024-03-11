@@ -1,6 +1,5 @@
 package com.ys.movie.board;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +47,8 @@ public class BoardController {
 		return vo;
 	}
 
-	private void calculateTotalPage(BoardVO vo, Model model) {
-		int count = dao.count(vo);
+	private void calculateTotalPage(Model model) {
+		int count = dao.count();
 		int totalPageCount = (int) Math.ceil(count / (double) PAGE_ROW_COUNT);
 
 		model.addAttribute("totalPageCount", totalPageCount);
@@ -57,29 +56,21 @@ public class BoardController {
 
 	@RequestMapping("board/list")
 	public void list(BoardVO vo, Model model) {
-		calculateTotalPage(vo, model);
+		calculateTotalPage(model);
 	}
 
 	@RequestMapping("board/ajax_page")
 	public void ajax_page(BoardVO vo, Model model) {
 		vo.setStartEnd(vo.getPage(), PAGE_ROW_COUNT);
-		calculateTotalPage(vo, model);
+		calculateTotalPage(model);
 		
 		List<BoardVO> list = dao.list(vo);
 		for (int i = 0; i < list.size(); i++) {
 			BoardVO boardVO = list.get(i);
 			List<TagVO> tagList = dao2.list(boardVO.getBoard_no());
-			boardVO.setTag(getTagName(tagList));
+			boardVO.setTagList(tagList);
 		}
 		model.addAttribute("list", list);
-	}
-	
-	private List<String> getTagName(List<TagVO> tagList) {
-		List<String> tagName = new ArrayList<>();
-		for (TagVO tagVO : tagList) {
-			tagName.add(tagVO.getTag_name());
-		}
-		return tagName;
 	}
 
 }
